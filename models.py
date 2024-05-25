@@ -22,9 +22,9 @@ class AcessoDados:
     def getSaldo(self, id):
         return next((x for x in self.tabela_saldos if x.conta_id == id), None)
 
-    def atualizar(self, conta_id, saldo):
+    def atualizar(self, conta_id, saldo_atualizado):
         try:
-            item_atualizado = ContaSaldo(conta_id, saldo)
+            item_atualizado = ContaSaldo(conta_id, saldo_atualizado)
             for x in self.tabela_saldos:
                 if x.conta_id == item_atualizado.conta_id:
                     index = x
