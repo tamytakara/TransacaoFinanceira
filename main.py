@@ -17,6 +17,8 @@ def gerar_transferencias():
 
 if __name__ == "__main__":
     transacoes = gerar_transferencias()
+    # TODO: necessário criar ordenação das transacoes por datetime
+    # Atualmente a lista já vem ordenada, mas é necessário criar essa verificação
 
     executor = ExecutarTransferenciaFinanceira()
 
