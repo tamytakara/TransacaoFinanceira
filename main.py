@@ -22,5 +22,5 @@ if __name__ == "__main__":
 
     # como as transferências tem o campo de datetime sequencial não faz sentido seguir com paralelismo da execução das transferências
     for transacao in transacoes:
-        executor.transferir(transacao["correlation_id"], transacao["conta_id_origem"], transacao["conta_id_destino"], transacao["VALOR"])
+        print(executor.transferir(transacao["correlation_id"], transacao["conta_id_origem"], transacao["conta_id_destino"], transacao["VALOR"]))
         

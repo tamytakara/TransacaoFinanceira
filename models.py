@@ -33,7 +33,6 @@ class AcessoDados:
 
             return item_atualizado
 
-
         except Exception as error:
             print(error)
 
@@ -43,11 +42,11 @@ class ExecutarTransferenciaFinanceira (AcessoDados):
         conta_saldo_origem = self.getSaldo(conta_id_origem)
 
         if (conta_saldo_origem.saldo < valor):
-            print(f"Transacao numero {correlation_id} foi cancelada por falta de saldo")
+            return (f"Transacao numero {correlation_id} foi cancelada por falta de saldo")
         else:
             conta_saldo_destino = self.getSaldo(conta_id_destino)
 
             conta_saldo_origem = self.atualizar(conta_id_origem, (conta_saldo_origem.saldo - valor))
             conta_saldo_destino = self.atualizar(conta_id_destino, (conta_saldo_destino.saldo + valor))
 
-            print(f"Transacao numero {correlation_id} foi efetivada com sucesso! Novos saldos: Conta Origem:{conta_saldo_origem.saldo} | Conta Destino: {conta_saldo_destino.saldo}")
+            return (f"Transacao numero {correlation_id} foi efetivada com sucesso! Novos saldos: Conta Origem:{conta_saldo_origem.saldo} | Conta Destino: {conta_saldo_destino.saldo}")
