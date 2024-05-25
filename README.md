@@ -1,4 +1,4 @@
-# TransacaoFinanceira
+# TransacaoFinanceira - Enunciado
 Case para refatoração
 
 Passos a implementar:
@@ -9,3 +9,17 @@ Passos a implementar:
 5. Crie um git hub e compartilhe o link respondendo o ultimo e-mail.
 
 Obs: Voce é livre para implementar na linguagem de sua preferência desde que respeite as funcionalidades e saídas existentes, além de aplicar os conceitos solicitados.
+
+# Como executar 
+
+## Requisitos 
+1. Ter Python >3.9.6
+2. Ter a biblioteca pytest instalada
+
+## Como rodar
+1. Rodar o projeto
+   1. No terminal, rodar o comando `python main.py`
+   2. Verificar as saídas exibidas
+2. Rodar os testes
+   1. No terminal, rodar o comando `pytest test_transacao_financeira.py`
+   2. Verificar os resultados obtidos
