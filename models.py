@@ -17,8 +17,7 @@ class AcessoDados:
         self.tabela_saldos.append(ContaSaldo(674038564, 400))
         self.tabela_saldos.append(ContaSaldo(563856300, 1200))
 
-        self.saldos = {}
-        self.saldos[938485762] = 180
+        # atributo saldos removido, pois não era utilizado
 
     def getSaldo(self, id):
         return next((x for x in self.tabela_saldos if x.conta == id), None)
@@ -32,6 +31,9 @@ class AcessoDados:
             self.tabela_saldos.remove(index)
             self.tabela_saldos.append(item_atualizado)
 
+            return item_atualizado
+
+
         except Exception as error:
             print(error)
 
@@ -44,7 +46,8 @@ class ExecutarTransferenciaFinanceira (AcessoDados):
             print(f"Transacao numero {correlation_id} foi cancelada por falta de saldo")
         else:
             conta_saldo_destino = self.getSaldo(conta_destino)
-            conta_saldo_origem.saldo -= valor
-            conta_saldo_destino.saldo += valor
+
+            conta_saldo_origem = self.atualizar(conta_origem, (conta_saldo_origem.saldo - valor))
+            conta_saldo_destino = self.atualizar(conta_destino, (conta_saldo_destino.saldo + valor))
 
             print(f"Transacao numero {correlation_id} foi efetivada com sucesso! Novos saldos: Conta Origem:{conta_saldo_origem.saldo} | Conta Destino: {conta_saldo_destino.saldo}")
