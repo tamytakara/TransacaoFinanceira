@@ -1,6 +1,6 @@
 class ContaSaldo:
-    def __init__(self, conta, saldo):
-        self.conta = conta
+    def __init__(self, conta_id, saldo):
+        self.conta_id = conta_id
         self.saldo = saldo
 
 
@@ -20,13 +20,13 @@ class AcessoDados:
         # atributo saldos removido, pois não era utilizado
 
     def getSaldo(self, id):
-        return next((x for x in self.tabela_saldos if x.conta == id), None)
+        return next((x for x in self.tabela_saldos if x.conta_id == id), None)
 
-    def atualizar(self, conta, saldo):
+    def atualizar(self, conta_id, saldo):
         try:
-            item_atualizado = ContaSaldo(conta, saldo)
+            item_atualizado = ContaSaldo(conta_id, saldo)
             for x in self.tabela_saldos:
-                if x.conta == item_atualizado.conta:
+                if x.conta_id == item_atualizado.conta_id:
                     index = x
             self.tabela_saldos.remove(index)
             self.tabela_saldos.append(item_atualizado)
@@ -39,15 +39,15 @@ class AcessoDados:
 
 
 class ExecutarTransferenciaFinanceira (AcessoDados):    
-    def transferir(self, correlation_id, conta_origem, conta_destino, valor):
-        conta_saldo_origem = self.getSaldo(conta_origem)
+    def transferir(self, correlation_id, conta_id_origem, conta_id_destino, valor):
+        conta_saldo_origem = self.getSaldo(conta_id_origem)
 
         if (conta_saldo_origem.saldo < valor):
             print(f"Transacao numero {correlation_id} foi cancelada por falta de saldo")
         else:
-            conta_saldo_destino = self.getSaldo(conta_destino)
+            conta_saldo_destino = self.getSaldo(conta_id_destino)
 
-            conta_saldo_origem = self.atualizar(conta_origem, (conta_saldo_origem.saldo - valor))
-            conta_saldo_destino = self.atualizar(conta_destino, (conta_saldo_destino.saldo + valor))
+            conta_saldo_origem = self.atualizar(conta_id_origem, (conta_saldo_origem.saldo - valor))
+            conta_saldo_destino = self.atualizar(conta_id_destino, (conta_saldo_destino.saldo + valor))
 
             print(f"Transacao numero {correlation_id} foi efetivada com sucesso! Novos saldos: Conta Origem:{conta_saldo_origem.saldo} | Conta Destino: {conta_saldo_destino.saldo}")
